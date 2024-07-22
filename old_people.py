@@ -8,6 +8,8 @@ Usage:
 """
 import os
 from create_db import db_path, script_dir
+import sqlite3
+from pprint import pprint
 
 def main():
     old_people_list = get_old_people()
@@ -22,8 +24,19 @@ def get_old_people():
     Returns:
         list: (name, age) of old people 
     """
-    # TODO: Create function body
-    # Hint: See example code in lab instructions entitled "Getting People Data from the Database"
+    con = sqlite3.connect('social_network.db')
+    cur = con.cursor()
+# Query the database for all information for all people.
+    cur.execute('SELECT * FROM people')
+# Fetch all query results.
+# The fetchall() method returns a list, where each list item
+# is a tuple containing data from one row in the people table.
+    all_people = cur.fetchall()
+# Pretty print (pprint) outputs data in an easier to read format.
+    pprint(all_people)
+    con.commit()
+    con.close()
+
     return
 
 def print_name_and_age(name_and_age_list):
@@ -31,9 +44,18 @@ def print_name_and_age(name_and_age_list):
 
     Args:
         name_and_age_list (list): (name, age) of people
+    
     """
-    # TODO: Create function body
-    # Hint: Use a for loop to iterate the list of tuples to print a sentence for each old person
+    
+    for row in cur.execute ("Select name and age t FROM data"):
+            cur.execute(name_and_age_list)
+        print (row)
+    rows = [
+        ("row1",),
+        ("row2",),
+    ]
+    cur.excutemany("Insert into data values(?)", rows)
+    
     return
 
 def save_name_and_age_to_csv(name_and_age_list, csv_path):
@@ -43,8 +65,16 @@ def save_name_and_age_to_csv(name_and_age_list, csv_path):
         name_and_age_list (list): (name, age) of people
         csv_path (str): Path of CSV file
     """
-    # TODO: Create function body
-    # Hint: In Lab 3, we converted a list of tuples into a pandas DataFrame and saved it to a CSV file
+    cur.executescript("""
+    
+    CREATE TABLE person(firstname, lastname, age);
+    CREATE TABLE publisher(name, address);
+""")
+    con = sqlite3.connect(":memory:")
+    cur = con.cursor()
+    cur.connection == con
+    True
+    con.close()
     return
 
 if __name__ == '__main__':
