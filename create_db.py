@@ -21,7 +21,7 @@ def main():
 
 def create_people_table():
     """Creates the people table in the database"""
-    # TODO: Create function body
+    # Create function body
     con= sqlite3.connect('social_network.db')
     cur = con.cursor()
     create_people_table = """
@@ -78,16 +78,16 @@ def populate_people_table():
             fake.administrative_unit(),
             fake.sentence(),
             fake.random_int(min= 1, max=100),
-            datetime.now(),
-            datetime.now()
+            datetime.now().strftime("%d/%m/%Y"),
+            datetime.now().strftime("%d/%m/%Y")
             )
         cur.execute(add_person_query, new_person)
         #save the contruster 
         con.commit
     con.close
 
-    # Hint: See example code in lab instructions entitled "Inserting Data into a Table"
-    # Hint: See example code in lab instructions entitled "Working with Faker"
+    # See example code in lab instructions entitled "Inserting Data into a Table"
+    # See example code in lab instructions entitled "Working with Faker"
     return
 
 if __name__ == '__main__':
