@@ -82,20 +82,14 @@ def save_name_and_age_to_csv(name_and_age_list, csv_path):
     """
 
     wb = Workbook(csv_path)
-
 # grab the active worksheet
     ws = wb.active
-
 # Data can be assigned directly to cells
     ws['name'] = name_and_age_list
-
 # Rows can also be appended
     ws.append([1, 2, 3])
-
 # Python types will automatically be converted
-
     ws['age'] = name_and_age_list
-
 # Save the files
     wb.save("Social Network")
     return
