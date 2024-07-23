@@ -80,7 +80,7 @@ def save_name_and_age_to_csv(name_and_age_list, csv_path):
         name_and_age_list (list): (name, age) of people
         csv_path (str): Path of CSV file
     """
-
+    
     wb = Workbook(csv_path)
 # grab the active worksheet
     ws = wb.active
