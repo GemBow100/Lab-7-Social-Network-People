@@ -50,9 +50,9 @@ def print_name_and_age(name_and_age_list):
         name_and_age_list (list): (name, age) of people
     
     """
-    #while loop to print
-    for i 
-    print(f'{name} is {age} years old.')
+    
+    for name, age in name_and_age_list:
+        print(f"{name} is {age} years old.")
     return name_and_age_list
 
 def save_name_and_age_to_csv(name_and_age_list, csv_path):
