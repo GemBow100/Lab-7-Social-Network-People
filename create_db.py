@@ -78,8 +78,8 @@ def populate_people_table():
             fake.administrative_unit(),
             fake.sentence(),
             fake.random_int(min= 1, max=100),
-            datetime.now().strftime("%d/%m/%Y"),
-            datetime.now().strftime("%d/%m/%Y")
+            datetime.now(),
+            datetime.now()
             )
         cur.execute(add_person_query, new_person)
         #save the contruster 

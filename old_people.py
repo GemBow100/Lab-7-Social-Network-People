@@ -11,7 +11,7 @@ from create_db import db_path, script_dir
 import sqlite3
 from pprint import pprint
 from openpyxl import Workbook
-import pandas
+import pandas as pd
 
 def main():
     old_people_list = get_old_people()
@@ -28,18 +28,20 @@ def get_old_people():
     """
     con = sqlite3.connect('social_network.db')
     cur = con.cursor()
-# Query the database for all information for all people.
-    cur.execute('SELECT * FROM people')
-# Fetch all query results.
-# The fetchall() method returns a list, where each list item
-# is a tuple containing data from one row in the people table.
-    all_people = cur.fetchall('name, age')
-# Pretty print (pprint) outputs data in an easier to read format.
+    # Query the database for all information for all people.
+    cur.execute('''SELECT name, age FROM people
+                    WHERE age > 49''')
+    # Fetch all query results.
+    # The fetchall() method returns a list, where each list item
+    # is a tuple containing data from one row in the people table.
+    all_people = cur.fetchall()
+    # Pretty print (pprint) outputs data in an easier to read format.
     pprint(all_people)
     con.commit()
+    
     con.close()
 
-    return
+    return all_people
 
 def print_name_and_age(name_and_age_list):
     """Prints name and age of all people in provided list
@@ -48,29 +50,9 @@ def print_name_and_age(name_and_age_list):
         name_and_age_list (list): (name, age) of people
     
     """
-    con = sqlite3.connect(db_path)
-    cur = con.cursor()
-
-    for row in cur.execute ("Select name and age t FROM data"):
-        print (row)
-        rows = [
-        ("Name",),
-        ("Age",),
-        ]
-        cur.excutemany("Insert into data values(?)", rows)
-        cur.executescript="""
-        CREATE TABLE
-        (
-            name,
-            age,
-
-        )
-        """
-
-
-        cur.execute(rows, db_path)
-        con.commit
-    con.close()
+    #while loop to print
+    for i 
+    print(f'{name} is {age} years old.')
     return name_and_age_list
 
 def save_name_and_age_to_csv(name_and_age_list, csv_path):
@@ -80,18 +62,27 @@ def save_name_and_age_to_csv(name_and_age_list, csv_path):
         name_and_age_list (list): (name, age) of people
         csv_path (str): Path of CSV file
     """
+
+    DataFramelist = [] 
+    for name, age in name_and_age_list:
+        DataFramelist.append({'name': name,
+                              'age': age})
     
-    wb = Workbook(csv_path)
+    df = pd.DataFrame(DataFramelist)
+
+    df.to_csv(csv_path,'Social Network.csv', index=False,)
+
+    print(df)
 # grab the active worksheet
-    ws = wb.active
+    
 # Data can be assigned directly to cells
-    ws['name'] = name_and_age_list
+
 # Rows can also be appended
-    ws.append([1, 2, 3])
+    
 # Python types will automatically be converted
-    ws['age'] = name_and_age_list
+    
 # Save the files
-    wb.save("Social Network")
+    
     return
 
 if __name__ == '__main__':
