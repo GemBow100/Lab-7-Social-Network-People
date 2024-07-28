@@ -10,7 +10,6 @@ import os
 from create_db import db_path, script_dir
 import sqlite3
 from pprint import pprint
-from openpyxl import Workbook
 import pandas as pd
 
 def main():
