@@ -1,4 +1,5 @@
 """
+Team: Joelle Waugh, Manuel Lopez, Ricardo Rubin, Sadia Shoily
 Description:
  Creates the people table in the Social Network database
  and populates it with 200 fake people.
@@ -69,20 +70,20 @@ def populate_people_table():
     """
     fake = Faker("en_CA")
     # Generate fake data for 10 provinces
-    for i in range(200):
-        new_person= (
+    for _ in range(200):
+        new_fperson= (
             fake.name(),
             fake.email(),
             fake.address(),
             fake.city(),
             fake.administrative_unit(),
             fake.sentence(),
-            fake.random_int(min= 1, max=100),
-            datetime.now(),
-            datetime.now()
+            fake.random_int(18 , 99),
+            datetime.now().strftime('%Y-%M-%D %H:%M:%S'),
+            datetime.now().strftime('%Y-%M-%D %H:%M:%S')
             )
-        cur.execute(add_person_query, new_person)
-        con.commit
+        cur.execute(add_person_query, new_fperson)
+    con.commit
     con.close
 
     # See example code in lab instructions entitled "Inserting Data into a Table"
