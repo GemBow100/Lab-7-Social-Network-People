@@ -7,10 +7,10 @@ Description:
 Usage:
  python create_db.py
 """
-import os
 import sqlite3
-from datetime import datetime
+import os
 from faker import Faker
+from datetime import datetime
 
 # Determine the path of the database
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,24 +25,25 @@ def create_people_table():
     # Create function body
     con= sqlite3.connect('social_network.db')
     cur = con.cursor()
-    create_people_table = """
- CREATE TABLE IF NOT EXISTS people
+
+    people_table_query = """
+    CREATE TABLE IF NOT EXISTS people
     (
-        id INTEGER PRIMARY KEY,
-        name TEXT NOT NULL,
-        email TEXT NOT NULL,
-        address TEXT NOT NULL,
-        city TEXT NOT NULL,
-        province TEXT NOT NULL,
-        bio TEXT,
-        age INTEGER,
+        id          INTEGER PRIMARY KEY,
+        name        TEXT NOT NULL,
+        email       TEXT NOT NULL,
+        address     TEXT NOT NULL,
+        city        TEXT NOT NULL,
+        province    TEXT NOT NULL,
+        bio         TEXT,
+        age         INTEGER,
         created_at DATETIME NOT NULL,
         updated_at DATETIME NOT NULL
     );
 """
-    cur.execute(create_people_table)
-    con.commit
-    con.close
+    cur.execute(people_table_query)
+    con.commit()
+    con.close()
 
     # Hint: See example code in lab instructions entitled "Creating a Table"
     return
@@ -66,25 +67,25 @@ def populate_people_table():
             created_at,
             updated_at
         )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
-    """
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+        """
     fake = Faker("en_CA")
     # Generate fake data for 10 provinces
-    for _ in range(200):
+    for _ in range (200):
         new_fperson= (
             fake.name(),
             fake.email(),
             fake.address(),
             fake.city(),
-            fake.administrative_unit(),
+            fake.province(),
             fake.sentence(),
-            fake.random_int(18 , 99),
+            fake.random_int(min =1, max = 100),
             datetime.now().strftime('%Y-%M-%D %H:%M:%S'),
             datetime.now().strftime('%Y-%M-%D %H:%M:%S')
-            )
+        )
         cur.execute(add_person_query, new_fperson)
-    con.commit
-    con.close
+    con.commit()
+    con.close()
 
     # See example code in lab instructions entitled "Inserting Data into a Table"
     # See example code in lab instructions entitled "Working with Faker"
