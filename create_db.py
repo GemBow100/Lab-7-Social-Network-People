@@ -82,7 +82,6 @@ def populate_people_table():
             datetime.now()
             )
         cur.execute(add_person_query, new_person)
-        #save the contruster 
         con.commit
     con.close
 

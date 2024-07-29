@@ -31,13 +31,12 @@ def get_old_people():
     cur.execute('''SELECT name, age FROM people
                     WHERE age > 49''')
     # Fetch all query results.
-    # The fetchall() method returns a list, where each list item
-    # is a tuple containing data from one row in the people table.
+    # The fetchall() method returns a list, where each list item.
+    # Is a tuple containing data from one row in the people table.
     all_people = cur.fetchall()
     # Pretty print (pprint) outputs data in an easier to read format.
     pprint(all_people)
-    con.commit()
-    
+    con.commit()    
     con.close()
 
     return all_people
@@ -49,7 +48,9 @@ def print_name_and_age(name_and_age_list):
         name_and_age_list (list): (name, age) of people
     
     """
-    
+    # TODO: Create function body
+    # Hint: Use a for loop to iterate the list of tuples to print a sentence for each old person
+
     for name, age in name_and_age_list:
         print(f"{name} is {age} years old.")
     return name_and_age_list
@@ -61,27 +62,18 @@ def save_name_and_age_to_csv(name_and_age_list, csv_path):
         name_and_age_list (list): (name, age) of people
         csv_path (str): Path of CSV file
     """
-
+    #TODO: Create function body
+    # Hint: In Lab 3, we converted a list of tuples into a pandas DataFrame and saved it to a CSV file
     DataFramelist = [] 
     for name, age in name_and_age_list:
         DataFramelist.append({'name': name,
                               'age': age})
-    
     df = pd.DataFrame(DataFramelist)
 
     df.to_csv(csv_path,'Social Network.csv', index=False,)
-
+    
     print(df)
-# grab the active worksheet
-    
-# Data can be assigned directly to cells
-
-# Rows can also be appended
-    
-# Python types will automatically be converted
-    
-# Save the files
-    
+   
     return
 
 if __name__ == '__main__':
