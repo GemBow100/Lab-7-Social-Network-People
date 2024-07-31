@@ -72,7 +72,7 @@ def populate_people_table():
     fake = Faker("en_CA")
     # Generate fake data for 10 provinces
     for _ in range (200):
-        new_fperson= (
+        new_person= (
             fake.name(),
             fake.email(),
             fake.address(),
@@ -83,7 +83,7 @@ def populate_people_table():
             datetime.now().strftime('%Y-%M-%D %H:%M:%S'),
             datetime.now().strftime('%Y-%M-%D %H:%M:%S')
         )
-        cur.execute(add_person_query, new_fperson)
+        cur.execute(add_person_query, new_person)
     con.commit()
     con.close()
 
